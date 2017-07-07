@@ -1,0 +1,45 @@
+<html ng-app="Nourri">
+    <head>
+        <title>Nourri</title>
+        <!--Angular-->
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0-beta.2/angular.min.js"></script>
+
+        <!--Firebase-->
+        <script src="https://www.gstatic.com/firebasejs/4.1.3/firebase.js"></script>
+        <script>
+            // Initialize Firebase
+            var config = {
+                apiKey: "AIzaSyC8Gsr7RPzDqd0xu6VIX6kLqhwKVumvHq4",
+                authDomain: "nourri-f4f95.firebaseapp.com",
+                databaseURL: "https://nourri-f4f95.firebaseio.com",
+                projectId: "nourri-f4f95",
+                storageBucket: "nourri-f4f95.appspot.com",
+                messagingSenderId: "733541893986"
+            };
+            firebase.initializeApp(config);
+        </script>
+
+        <!--Main javascript-->
+        <script src="main.js"></script>
+
+        <!--Main stylesheet-->
+        <link rel="stylesheet" type="text/css" href="style.css">
+
+        <!--Font family-->
+        <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"/>
+    </head>
+    <body ng-controller="nourriController">
+        <div class="sideNav" ng-show="showSideNav">
+        </div>
+
+        <div class="wrapper" ng-class="{'showSideNav': showSideNav }">
+            <div class="header">
+                <span class="menuToggle" ng-click="showSideNav = !showSideNav">menu</span>
+                <h1>Nourri</h1>
+            </div>
+            <div>
+                {{ scheme}}
+            </div>
+        </div>
+    </body>
+</html>

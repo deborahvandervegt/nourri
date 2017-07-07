@@ -1,0 +1,36 @@
+/*
+Main stylesheet
+*/
+
+body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+}
+
+div.header {
+    background-color: #337AB7;
+    text-align: center;
+    color: #FFFFFF;
+    text-transform: uppercase;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    position: relative;
+}
+
+div.header span.menuToggle {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+}
+
+div.sideNav {
+    width: 250px;
+    background-color: #F19222;
+    position: absolute;
+    top: 0;
+    height: 100%;
+}
+
+div.wrapper.showSideNav {
+    padding-left: 250px;
+}
