@@ -25,14 +25,13 @@
                 <span class="menuToggle" ng-click="showSideNav = !showSideNav">menu</span>
                 <h1>Nourri</h1>
             </div>
-            <div>
-                <h1>Quinten eten gegeven</h1>
-                <input type="text" id="amount" />ml<br>
-                <button id="quickAdd">ADD</button>
-
-
-                <br>
-                <br>
+            <div class="main">
+                <h1>Voeding</h1>
+                <div class="quick-add">
+                    <p>Snel toevoegen:</p>
+                    <input type="text" id="amount" /><span>ml</span>
+                    <button id="quickAdd">Toevoegen</button>
+                </div>
                 INPUT 1: <input type="text" id="info1" /><br>
                 INPUT 2: <input type="text" id="info2" /><br>
                 <button id="save_button">SAVE</button>
@@ -45,46 +44,46 @@
         <script src="https://www.gstatic.com/firebasejs/4.1.3/firebase.js"></script>
 
         <script>
-            // Initialize Firebase
-            var config = {
-                apiKey: "AIzaSyAzowWyHVK8ZKJPfP5O7EzIGC_uR1SC7a0",
-                authDomain: "nourri-dafa4.firebaseapp.com",
-                databaseURL: "https://nourri-dafa4.firebaseio.com",
-                projectId: "nourri-dafa4",
-                storageBucket: "nourri-dafa4.appspot.com",
-                messagingSenderId: "1029878868016"
-            };
-            firebase.initializeApp(config);
+                            // Initialize Firebase
+                            var config = {
+                                apiKey: "AIzaSyAzowWyHVK8ZKJPfP5O7EzIGC_uR1SC7a0",
+                                authDomain: "nourri-dafa4.firebaseapp.com",
+                                databaseURL: "https://nourri-dafa4.firebaseio.com",
+                                projectId: "nourri-dafa4",
+                                storageBucket: "nourri-dafa4.appspot.com",
+                                messagingSenderId: "1029878868016"
+                            };
+                            firebase.initializeApp(config);
 
-            var rootRef = firebase.database().ref().child('infos');
-            var amountRef = firebase.database().ref().child('amount');
+                            var rootRef = firebase.database().ref().child('infos');
+                            var amountRef = firebase.database().ref().child('amount');
 
-            $('#quickAdd').click(function() {
-              var currentDate = new Date;
-                amountRef.set({
-                    amount:$('#amount').val(),
-                    date:currentDate.toString()
-                });
-            });
+                            $('#quickAdd').click(function () {
+                                var currentDate = new Date;
+                                amountRef.set({
+                                    amount: $('#amount').val(),
+                                    date: currentDate.toString()
+                                });
+                            });
 
-            $('#save_button').click(function() {
-                rootRef.set({
-                    info1:$('#info1').val(),
-                    info2:$('#info2').val()
-                });
-            });
+                            $('#save_button').click(function () {
+                                rootRef.set({
+                                    info1: $('#info1').val(),
+                                    info2: $('#info2').val()
+                                });
+                            });
 
-            $('#clear_button').click(function() {
-                $('#info1').val('');
-                $('#info2').val('');
-            });
+                            $('#clear_button').click(function () {
+                                $('#info1').val('');
+                                $('#info2').val('');
+                            });
 
-            $('#load_button').click(function() {
-                rootRef.on('value', function(snapshot){
-                    $('#info1').val(snapshot.child('info1').val());
-                    $('#info2').val(snapshot.child('info2').val());
-                });
-            });
+                            $('#load_button').click(function () {
+                                rootRef.on('value', function (snapshot) {
+                                    $('#info1').val(snapshot.child('info1').val());
+                                    $('#info2').val(snapshot.child('info2').val());
+                                });
+                            });
 
 
         </script>
