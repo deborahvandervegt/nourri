@@ -30,6 +30,9 @@
                 <input type="text" id="amount" />ml<br>
                 <button id="quickAdd">ADD</button>
 
+                <button id="show_added">show</button>
+
+
 
                 <br>
                 <br>
@@ -61,11 +64,19 @@
 
             $('#quickAdd').click(function() {
               var currentDate = new Date;
-                amountRef.set({
+              var ref = amountRef.push();
+                ref.set({
                     amount:$('#amount').val(),
                     date:currentDate.toString()
                 });
             });
+
+            $('#show_added').click(function() {
+                amountRef.on('value', function(snapshot){
+                    console.log(snapshot.val());
+                });
+            });
+
 
             $('#save_button').click(function() {
                 rootRef.set({
