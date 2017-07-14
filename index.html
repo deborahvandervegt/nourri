@@ -2,10 +2,13 @@
     <head>
         <title>Nourri</title>
         <!--Angular-->
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0-beta.2/angular.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
 
         <!--jQuery-->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+        <!-- AngularFire -->
+        <script src="https://cdn.firebase.com/libs/angularfire/2.3.0/angularfire.min.js"></script>
 
         <!--Main javascript-->
         <script src="main.js"></script>
@@ -30,71 +33,80 @@
                 <h1>Voeding</h1>
                 <div class="quick-add">
                     <p>Snel toevoegen:</p>
-                    <input type="text" id="amount" /><span>ml</span>
+                    <input type="text" id="amount"/>
+                    <select id="amount_type">
+                        <option>ml</option>
+                        <option>min</option>
+                    </select>
                     <button id="quickAdd">Toevoegen</button>
-                    <button id="show_added">show</button>
+                    <button>show all</button>
                 </div>
 
+                <!-- Test get/set firebase -->
                 INPUT 1: <input type="text" id="info1" /><br>
                 INPUT 2: <input type="text" id="info2" /><br>
                 <button id="save_button">SAVE</button>
                 <button id="clear_button">CLEAR</button>
                 <button id="load_button">LOAD</button>
             </div>
+            <div class="main">
+                <h1>Voeding Vandaag</h1>
+                <ul>
+                  <li ng-repeat="item in amounts">
+                      {{item.date}} <br>
+                      {{item.amount}}
+                      {{item.type}}
+                  </li>
+                </ul>
+            </div>
         </div>
-
         <!--Firebase-->
         <script src="https://www.gstatic.com/firebasejs/4.1.3/firebase.js"></script>
 
         <script>
+            // Initialize Firebase
+            var config = {
+                apiKey: "AIzaSyAzowWyHVK8ZKJPfP5O7EzIGC_uR1SC7a0",
+                authDomain: "nourri-dafa4.firebaseapp.com",
+                databaseURL: "https://nourri-dafa4.firebaseio.com",
+                projectId: "nourri-dafa4",
+                storageBucket: "nourri-dafa4.appspot.com",
+                messagingSenderId: "1029878868016"
+            };
+            firebase.initializeApp(config);
 
-                            // Initialize Firebase
-                            var config = {
-                                apiKey: "AIzaSyAzowWyHVK8ZKJPfP5O7EzIGC_uR1SC7a0",
-                                authDomain: "nourri-dafa4.firebaseapp.com",
-                                databaseURL: "https://nourri-dafa4.firebaseio.com",
-                                projectId: "nourri-dafa4",
-                                storageBucket: "nourri-dafa4.appspot.com",
-                                messagingSenderId: "1029878868016"
-                            };
-                            firebase.initializeApp(config);
+            var rootRef = firebase.database().ref().child('infos');
+            var amountRef = firebase.database().ref().child('amount');
 
-                            var rootRef = firebase.database().ref().child('infos');
-                            var amountRef = firebase.database().ref().child('amount');
+            // Add amount
+            $('#quickAdd').click(function () {
+                var currentDate = new Date;
+                amountRef.push({
+                    amount: $('#amount').val(),
+                    date: currentDate.toString(),
+                    type: $('#amount_type').val()
+                });
+            });
 
-                            $('#quickAdd').click(function () {
-                                var currentDate = new Date;
-                                amountRef.set({
-                                    amount: $('#amount').val(),
-                                    date: currentDate.toString()
-                                });
-                            });
-                            
-                            $('#show_added').click(function() {
-                                amountRef.on('value', function(snapshot){
-                                    console.log(snapshot.val());
-                                });
-                            });
+            // Save 2 input fields to firebase
+            $('#save_button').click(function () {
+                rootRef.set({
+                    info1: $('#info1').val(),
+                    info2: $('#info2').val()
+                });
+            });
 
-                            $('#save_button').click(function () {
-                                rootRef.set({
-                                    info1: $('#info1').val(),
-                                    info2: $('#info2').val()
-                                });
-                            });
+            $('#clear_button').click(function () {
+                $('#info1').val('');
+                $('#info2').val('');
+            });
 
-                            $('#clear_button').click(function () {
-                                $('#info1').val('');
-                                $('#info2').val('');
-                            });
-
-                            $('#load_button').click(function () {
-                                rootRef.on('value', function (snapshot) {
-                                    $('#info1').val(snapshot.child('info1').val());
-                                    $('#info2').val(snapshot.child('info2').val());
-                                });
-                            });
-
+            $('#load_button').click(function () {
+                rootRef.on('value', function (snapshot) {
+                    $('#info1').val(snapshot.child('info1').val());
+                    $('#info2').val(snapshot.child('info2').val());
+                });
+            });
         </script>
     </body>
 </html>
