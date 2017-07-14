@@ -7,8 +7,11 @@ app.controller('nourriController', function($scope, $firebaseArray) {
 
     $scope.todaysDate = new Date;
 
-    var ref = firebase.database().ref().child("amount");
-    $scope.amounts = $firebaseArray(ref);
+    var ref = firebase.database().ref();
+
+    $scope.amounts = $firebaseArray(ref.child("amount"));
+
+    $scope.baby_weight = $firebaseArray(ref.child("weight"));
 
     // Get total amount of feedings equal to input type
     $scope.getTotal = function(type_input){

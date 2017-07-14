@@ -52,6 +52,12 @@
                 Aantal voedingen: {{amounts.length}}<br>
                 Totaal kunstvoeding mililiters: {{getTotal("ml")}}<br>
                 Totaal borstvoedings minuten: {{getTotal("min")}}<br>
+
+                Baby's gewicht is
+                <input type="text" ng-model="baby_weight" id="baby_weight"/>
+                <button id="save_weight">SAVE</button><br>
+                De baby weegt {{baby_weight[baby_weight.length - 1].weight}}gram <br>
+                en moet {{ baby_weight[baby_weight.length - 1].weight*150/1000 }}ml per dag drinken
             </div>
             <div class="main">
                 <!-- Test get/set firebase -->
@@ -80,6 +86,9 @@
 
             var rootRef = firebase.database().ref().child('infos');
             var amountRef = firebase.database().ref().child('amount');
+            var weightRef = firebase.database().ref().child('weight');
+
+
 
             // Add amount
             $('#quickAdd').click(function () {
@@ -88,6 +97,14 @@
                     amount: parseInt($('#amount').val()),
                     date: currentDate.toString(),
                     type: $('#amount_type').val()
+                });
+            });
+
+            $('#save_weight').click(function () {
+                var currentDate = new Date;
+                weightRef.push({
+                    weight: parseInt($('#baby_weight').val()),
+                    date: currentDate.toString()
                 });
             });
 
