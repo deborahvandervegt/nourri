@@ -1,8 +1,11 @@
 /*
  * Main javascript file.
  */
-var app = angular.module('Nourri', []);
+var app = angular.module('Nourri', ["firebase"]);
 
-app.controller('nourriController', ['$scope', function($scope) {
-   $scope.scheme = 'Hello World in controller';
-}]);
+app.controller('nourriController', function($scope, $firebaseArray) {
+
+    var ref = firebase.database().ref().child("amount");
+    $scope.amounts = $firebaseArray(ref);
+    
+});
