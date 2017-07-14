@@ -41,7 +41,19 @@
                     <button id="quickAdd">Toevoegen</button>
                     <button>show all</button>
                 </div>
-
+            </div>
+            <div class="main">
+                <h1>Voeding {{todaysDate | date:'dd-MM-yyyy'}}</h1>
+                <ul>
+                  <li ng-repeat="item in amounts | orderBy:'date' | filter: getOnlyToday">
+                      {{getFeedDate(item.date) | date:'HH:mm'}} - {{item.amount}}{{item.type}}
+                  </li>
+                </ul>
+                Aantal voedingen: {{amounts.length}}<br>
+                Totaal kunstvoeding mililiters: {{getTotal("ml")}}<br>
+                Totaal borstvoedings minuten: {{getTotal("min")}}<br>
+            </div>
+            <div class="main">
                 <!-- Test get/set firebase -->
                 INPUT 1: <input type="text" id="info1" /><br>
                 INPUT 2: <input type="text" id="info2" /><br>
@@ -49,16 +61,7 @@
                 <button id="clear_button">CLEAR</button>
                 <button id="load_button">LOAD</button>
             </div>
-            <div class="main">
-                <h1>Voeding Vandaag</h1>
-                <ul>
-                  <li ng-repeat="item in amounts">
-                      {{item.date}} <br>
-                      {{item.amount}}
-                      {{item.type}}
-                  </li>
-                </ul>
-            </div>
+
         </div>
         <!--Firebase-->
         <script src="https://www.gstatic.com/firebasejs/4.1.3/firebase.js"></script>
@@ -82,7 +85,7 @@
             $('#quickAdd').click(function () {
                 var currentDate = new Date;
                 amountRef.push({
-                    amount: $('#amount').val(),
+                    amount: parseInt($('#amount').val()),
                     date: currentDate.toString(),
                     type: $('#amount_type').val()
                 });
