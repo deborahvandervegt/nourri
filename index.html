@@ -64,14 +64,14 @@
 
                             $('#quickAdd').click(function () {
                                 var currentDate = new Date;
-                                amountRef.set({
+                                amountRef.push({
                                     amount: $('#amount').val(),
                                     date: currentDate.toString()
                                 });
                             });
-                            
-                            $('#show_added').click(function() {
-                                amountRef.on('value', function(snapshot){
+
+                            $('#show_added').click(function () {
+                                amountRef.on('value', function (snapshot) {
                                     console.log(snapshot.val());
                                 });
                             });
