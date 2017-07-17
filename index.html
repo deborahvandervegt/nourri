@@ -45,8 +45,8 @@
             <!-- List of feedings - today only -->
             <div class="main">
                 <h1>Voeding {{meal_view_date | date:'dd-MM-yyyy'}}</h1>
-                <button ng-click="setFilterDate(1)">Vorige dag</button>
-                <button ng-click="setFilterDate(-1)">Volgende dag</button>
+                <button ng-click="setFilterDate(-1)">Vorige dag</button>
+                <button ng-click="setFilterDate(1)" ng-hide="isToday()">Volgende dag</button>
                 <ul>
                   <li ng-repeat="meal in meals | filter: showOneDay | orderBy:'date'">
                       {{getFeedDate(meal.date) | date:'HH:mm'}} - {{meal.amount}}{{meal.type}}

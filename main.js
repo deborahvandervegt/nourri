@@ -4,20 +4,21 @@
 var app = angular.module('Nourri', ["firebase"]);
 
 app.controller('nourriController', function($scope, $firebaseArray) {
+    // Firebase variables
+    var ref = firebase.database().ref();
+    $scope.meals = $firebaseArray(ref.child("amount"));
+    $scope.baby_weight = $firebaseArray(ref.child("weight"));
 
     $scope.date_today = new Date;
+    $scope.meal_view_date = new Date;
 
-    $scope.meal_view_date = $scope.date_today;
-
-    $scope.setFilterDate = function(daysAmount){
-        $scope.meal_view_date.setDate($scope.meal_view_date.getDate() - daysAmount);
+    $scope.isToday = function(){
+        return $scope.meal_view_date.setHours(0,0,0,0) == $scope.date_today.setHours(0,0,0,0)
     }
 
-    var ref = firebase.database().ref();
-
-    $scope.meals = $firebaseArray(ref.child("amount"));
-
-    $scope.baby_weight = $firebaseArray(ref.child("weight"));
+    $scope.setFilterDate = function(daysAmount){
+        $scope.meal_view_date.setDate($scope.meal_view_date.getDate() + daysAmount);
+    }
 
     // Get total amount of feedings equal to input type
     $scope.getTotalMeals = function(type_input){
@@ -25,8 +26,7 @@ app.controller('nourriController', function($scope, $firebaseArray) {
         for(var i = 0; i < $scope.meals.length; i++){
             if(type_input == $scope.meals[i].type){
                 total += $scope.meals[i].amount;
-            }
-        }
+        }}
         return total;
     }
 
