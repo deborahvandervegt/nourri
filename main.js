@@ -6,7 +6,7 @@ var app = angular.module('Nourri', ["firebase"]);
 app.controller('nourriController', function($scope, $firebaseArray) {
     // Firebase variables
     var ref = firebase.database().ref();
-    $scope.meals = $firebaseArray(ref.child("amount"));
+    $scope.meals = $firebaseArray(ref.child("meals"));
     $scope.baby_weight = $firebaseArray(ref.child("weight"));
 
     $scope.date_today = new Date;
