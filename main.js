@@ -35,9 +35,9 @@ app.controller('nourriController', function($scope, $firebaseArray) {
         return d;
     }
 
-    $scope.showOneDay = function(input) {
-        var input_date = $scope.getFeedDate(input.date)
+    $scope.showOneDay = function(input){
+        var input_date = $scope.getFeedDate(input.date);
         var view_date = new Date($scope.meal_view_date);
-        return view_date.setHours(0,0,0,0) == input_date.setHours(0,0,0,0)
+        return view_date.setHours(0,0,0,0) == input_date.setHours(0,0,0,0);
     }
 });
