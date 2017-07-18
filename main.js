@@ -13,7 +13,7 @@ app.controller('nourriController', function($scope, $firebaseArray) {
     $scope.meal_view_date = new Date;
 
     $scope.isToday = function(){
-        return $scope.meal_view_date.setHours(0,0,0,0) == $scope.date_today.setHours(0,0,0,0)
+        return $scope.meal_view_date.setHours(0,0,0,0) == $scope.date_today.setHours(0,0,0,0);
     }
 
     $scope.setFilterDate = function(daysAmount){
