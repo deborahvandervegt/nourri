@@ -24,8 +24,18 @@ app.controller('nourriController', function($scope, $firebaseArray) {
     $scope.getTotalMeals = function(type_input){
         var total = 0;
         for(var i = 0; i < $scope.meals.length; i++){
-            if(type_input == $scope.meals[i].type){
+            if(type_input == $scope.meals[i].type && $scope.showOneDay($scope.meals[i])){
                 total += $scope.meals[i].amount;
+        }}
+        return total;
+    }
+
+    // Get total amount of feedings equal to input type
+    $scope.getTodaysFeedingTotal = function(){
+        var total = 0;
+        for(var i = 0; i < $scope.meals.length; i++){
+            if($scope.showOneDay($scope.meals[i])){
+                total++;
         }}
         return total;
     }
