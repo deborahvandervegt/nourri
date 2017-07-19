@@ -21,59 +21,31 @@
     </head>
     <body ng-controller="nourriController">
         <div class="sideNav" ng-show="showSideNav">
+            <ul>
+                <li>
+                    <a href="index.html">Dashboard</a>
+                </li>
+                <li>
+                    <a href="nutrition.html">Voedingen</a>
+                </li>
+            </ul>
         </div>
 
         <div class="wrapper" ng-class="{'showSideNav': showSideNav }">
             <div class="header">
                 <span class="menuToggle" ng-click="showSideNav = !showSideNav">menu</span>
-                <h1>Nourri</h1>
+                <h1>
+                    <a href="index.html">Nourri</a>
+                </h1>
             </div>
 
-            <div class="main">
-                <h1>Voeding</h1>
-                <div class="quick-add">
-                    <p>Snel toevoegen:</p>
-                    <input type="text" id="amount"/>
-                    <select id="amount_type">
-                        <option>ml</option>
-                        <option>min</option>
-                    </select>
-                    <button id="quickAdd">Toevoegen</button>
+            <div class="main dashboard">
+                <h1>Dashboard</h1>
+                <div class="row">
+                    <a href="nutrition.html"><img src="images/meals-icon.png" width="125px" height="125px"/>
+                        <span class="label">Voedingen<span>
+                    </a>
                 </div>
-            </div>
-            <!-- List of feedings - today only -->
-            <div class="main meals-overview">
-                <button class="date-button previous" ng-click="setFilterDate( - 1)">&lt;</button>
-                <h2>{{meal_view_date| date:'dd-MM-yyyy'}}</h2>
-                <button class="date-button next" ng-click="setFilterDate(1)" ng-hide="isToday()">&gt;</button>
-                <h3>Overzicht</h3>
-                <ul>
-                    <li ng-repeat="meal in meals| filter: showOneDay | orderBy:'date'">
-                        {{meal.amount}} {{meal.type}}. om {{getFeedDate(meal.date) | date:'HH:mm'}} uur
-                    </li>
-                </ul>
-
-                <div class="total-of-meals">
-                    <h3>Voedingsinformatie</h3>
-                    <div class="row">
-                        <img src="images/meal-icon.png" width="50px" height="50px"/>
-                        <span class="total">{{ getTodaysFeedingTotal()}}</span>
-                    </div>
-                    <div class="row">
-                        <img src="images/bottle-icon.png" width="50px" height="50px"/>
-                        <span class="total">{{ getTotalMeals("ml")}} ml.</span>
-                    </div>
-                    <div class="row">
-                        <img src="images/nurture-icon.png" width="50px" height="50px"/>
-                        <span class="total">{{ getTotalMeals("min")}} min.</span>
-                    </div>
-                </div>
-
-                <h3>Gewicht</h3>
-                Voer het gewicht in: 
-                <input type="text" ng-model="baby_weight" id="baby_weight"/>
-                <button id="save_weight">Bereken</button><br>
-                <p>Totaal aantal benodigde voeding per dag: {{ baby_weight[baby_weight.length - 1].weight * 150 / 1000}} ml.</p>
             </div>
         </div>
         <!--Firebase-->
@@ -90,24 +62,6 @@
                             messagingSenderId: "1029878868016"
                     };
                     firebase.initializeApp(config);
-                    var mealsRef = firebase.database().ref().child('meals');
-                    var weightRef = firebase.database().ref().child('weight');
-                    // Add amount
-                    $('#quickAdd').click(function () {
-                    var currentDate = new Date;
-                    mealsRef.push({
-                    amount: parseInt($('#amount').val()),
-                            date: currentDate.toString(),
-                            type: $('#amount_type').val()
-                    });
-                    });
-                    $('#save_weight').click(function () {
-                    var currentDate = new Date;
-                    weightRef.push({
-                    weight: parseInt($('#baby_weight').val()),
-                            date: currentDate.toString()
-                    });
-                    });
         </script>
     </body>
 </html>

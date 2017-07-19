@@ -70,8 +70,9 @@ div.header span.menuToggle {
     top: 50%;
 }
 
-div.header h1 {
+div.header h1 a {
     color: #FFFFFF;
+    text-decoration: none;
 }
 
 /* Navigation */
@@ -121,6 +122,18 @@ div.main button.date-button.next {
     margin-right: 0;
 }
 
+/* Dashboard */
+
+div.dashboard a {
+    color: #787878;
+    text-decoration: none;
+}
+
+span.label {
+    text-align: center;
+    display: block;
+}
+
 /* Quick add */
 
 div.quick-add {
@@ -140,7 +153,7 @@ div.quick-add span {
 
 /* Meals overview */
 
-div.meals-overview  div.row {
+div.row {
     display: inline-block;
     width: calc(50% / 3);
     text-align: center;
