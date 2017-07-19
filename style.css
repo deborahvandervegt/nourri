@@ -134,6 +134,11 @@ span.label {
     display: block;
 }
 
+div.dashboard div.sleep img {
+    padding: 10px;
+    padding-bottom: 5px;
+}
+
 /* Quick add */
 
 div.quick-add {
