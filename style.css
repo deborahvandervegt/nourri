@@ -1,11 +1,58 @@
-/*
-Main stylesheet
-*/
+/* Main stylesheet */
 
 body {
-    margin: 0;
+    color: #303030;
     font-family: 'Roboto', sans-serif;
+    margin: 0;
 }
+
+button {
+    background-color: #F46336;
+    color: #FFFFFF;
+    border-color: transparent;
+    border-radius: 5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    display: inline-block;
+    padding: 5px;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+button:hover {
+    background-color: #F4835F;
+}
+
+h1,
+h2 {
+    color: #337AB7;
+}
+
+h3 {
+    text-transform: uppercase;
+    font-size: 16px;
+    font-weight: bold;
+    border-top: 1px solid #D6D6D5;
+    width: 50%;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    margin: 0;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    margin-bottom: 15px;
+    line-height: 25px;
+}
+
+li::before {
+    content: "\002022";
+    color: #909090;
+}
+
+/* Header */
 
 div.header {
     background-color: #337AB7;
@@ -23,33 +70,67 @@ div.header span.menuToggle {
     top: 50%;
 }
 
+div.header h1 {
+    color: #FFFFFF;
+}
+
+/* Navigation */
+
 div.sideNav {
-    width: 250px;
     background-color: #F19222;
+    width: 250px;
+    height: 100%;
     position: absolute;
     top: 0;
-    height: 100%;
 }
 
 div.wrapper.showSideNav {
     padding-left: 250px;
 }
 
+/* Main */
+
 div.main {
-    padding: 20px;
     width: 950px;
+    padding: 20px;
     margin-left: auto;
     margin-right: auto;
 }
 
+div.main h2.ng-binding {
+    display: inline-block;
+}
+
+/* Date button */
+
+div.main button.date-button {
+    background-color: transparent;
+    color: #F46336;
+    font-size: 20px;
+    font-weight: bold;
+    display: inline-block; 
+}
+
+div.main button.date-button.previous {
+    margin-left: 0;
+    margin-right: 50px;
+}
+
+div.main button.date-button.next {
+    margin-left: 50px;
+    margin-right: 0;
+}
+
+/* Quick add */
+
 div.quick-add {
-    padding: 10px;
     border: 1px solid #D6D6D5;
-    margin-bottom: 40px;
+    padding: 10px;
 }
 
 div.quick-add p {
     color: #787878;
+    display: inline-block;
 }
 
 div.quick-add span {
@@ -57,18 +138,21 @@ div.quick-add span {
     padding-right: 10px;
 }
 
-div.quick-add button {
-    display: block;
-    margin-top: 10px;
-    background-color: #F46336;
-    border-color: transparent;
-    border-radius: 5px;
-    color: white;
-    text-transform: uppercase;
-    cursor: pointer;
-    padding: 5px;
+/* Meals overview */
+
+div.meals-overview  div.row {
+    display: inline-block;
+    width: calc(50% / 3);
+    text-align: center;
+    vertical-align: top;
 }
 
-div.quick-add button:hover {
-    background-color: #F4835F;
+div.meals-overview  div.row img {
+    margin-top: 20px;
+}
+
+div.meals-overview  div.row span {
+    display: block;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
